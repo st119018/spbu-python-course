@@ -115,8 +115,7 @@ class Vector:
         """
         if type(vect) != Vector:
             raise TypeError(f"Incorrect type: {type(vect)}, " "expected: Vector.")
-        try:
-            cos = self.scalar_product(vect) / (self.length() * vect.length())
-        except ZeroDivisionError:
-            print("Division error: division by zero")
+        if self.length() * vect.length() == 0.0:
+            raise ZeroDivisionError("Division by zero")
+        cos = self.scalar_product(vect) / (self.length() * vect.length())
         return acos(cos)

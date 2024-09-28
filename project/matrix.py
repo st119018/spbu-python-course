@@ -101,7 +101,7 @@ class Matrix:
             raise IndexError("Different size of matrices")
         new_elements = [0] * len(self.elements)
         for i in range(len(self.elements)):
-            new_elements.append(self.elements[i] + matrix.elements[i])
+            new_elements[i] += self.elements[i] + matrix.elements[i]
         return Matrix(self.rows, self.columns, new_elements)
 
     def __mul__(self, matrix):
