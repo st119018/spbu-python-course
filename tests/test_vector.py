@@ -4,6 +4,13 @@ import pytest
 from project.vector import Vector
 
 
+def test_init():
+    v = Vector([4, 5.4, 8])
+    assert v.coord == [4, 5.4, 8]
+    with pytest.raises(IndexError):
+        Vector([])
+
+
 def test_length():
     v1 = Vector([3, 4])
     v2 = Vector([0, 0])
@@ -11,6 +18,13 @@ def test_length():
     assert v1.length() == 5
     assert v2.length() == 0
     assert v3.length() == 2
+
+
+def test_dim():
+    v1 = Vector([3, 4])
+    v2 = Vector([7, 0, 0, 4, 5, 1])
+    assert v1.dim() == 2
+    assert v2.dim() == 6
 
 
 def test_scalar_product():

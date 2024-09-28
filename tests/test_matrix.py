@@ -4,6 +4,19 @@ import pytest
 from project.matrix import Matrix
 
 
+def test_init():
+    m = Matrix(2, 3, [-1.1, 8, 4.8, 0, 0, 0])
+    assert m.elements == [-1.1, 8, 4.8, 0, 0, 0]
+    assert m.rows == 2
+    assert m.columns == 3
+    with pytest.raises(ValueError):
+        Matrix(-1, 5, [0, 0, 0, 0])
+    with pytest.raises(IndexError):
+        Matrix(1, 1, [])
+    with pytest.raises(IndexError):
+        Matrix(1, 1, [0, 0, 0])
+
+
 def test_add():
     m1 = Matrix(2, 2, [1, -1, 1, 0])
     m2 = Matrix(2, 2, [1.1, 1, 1, 0])
