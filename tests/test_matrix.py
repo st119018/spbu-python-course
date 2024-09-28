@@ -9,7 +9,7 @@ def test_add():
     m2 = Matrix(2, 2, [1.1, 1, 1, 0])
     m3 = Matrix(1, 2, [1, 1])
     m4 = m1 + m2
-    assert m4.elements == [1.1, 0, 2, 0]
+    assert m4.elements == [2.1, 0, 2, 0]
     with pytest.raises(TypeError):
         m1 + 7
     with pytest.raises(IndexError):
@@ -27,5 +27,5 @@ def test_mul():
 
 
 def test_transpos():
-    m = Matrix(1, 3, [1, 2, 3])
-    assert m.transpos().elements == [3, 2, 1]
+    m = Matrix(2, 2, [1, 2, 3, 4])
+    assert m.transpos().elements == [1, 3, 2, 4]

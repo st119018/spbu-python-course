@@ -21,7 +21,7 @@ def test_scalar_product():
     assert v1.scalar_product(v2) == 0
     assert v3.scalar_product(v4) == -0.5
     with pytest.raises(IndexError):
-        v1.scalar_product(v2)
+        v1.scalar_product(v3)
     with pytest.raises(TypeError):
         v1.scalar_product(3)
 
