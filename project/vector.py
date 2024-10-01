@@ -18,8 +18,6 @@ class Vector:
 
     Methods
     -------
-    __is_num(args)
-        Check if vector has coordinates and they are numbers
     length()
         Calculate length of vector
     dim()
@@ -37,31 +35,19 @@ class Vector:
         ----------
         args : list
             List of coordinates of vector
-        """
-        self.__is_num(args)
-        self.coord = args
-
-    def __is_num(self, args: list):
-        """Check if given list isn't empty and consists of numbers.
-
-        Parameters
-        ----------
-        args : list
 
         Raises
         ------
         IndexError
-            If not numbers are in the given list or
-            given list is empty
+            If given list is empty
+        TypeError
+            If not numbers are in the given list
         """
         if len(args) == 0:
             raise IndexError("Vector has no coordinates")
-        try:
-            sum = 0
-            for i in range(len(args)):
-                sum += args[i]
-        except IndexError:
-            print("Index error: vector doesn't consist of numbers")
+        if not (all([isinstance(item, (int, float)) for item in args])):
+            raise TypeError("Vector doesn't consist of numbers")
+        self.coord = args
 
     def length(self) -> float:
         """Return length of vector."""
