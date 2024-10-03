@@ -9,13 +9,15 @@ Functions
 is_matrix(args)
 """
 
+from typing import List, Union
+
 
 class Matrix:
     """Class implements operations with matrices
 
     Attributes
     ----------
-    elements : list
+    elements : List[List[Union[int, float]]]
         List of lists; elements of matrix
 
     Methods
@@ -28,12 +30,12 @@ class Matrix:
         Transpose matrix
     """
 
-    def __init__(self, args: list):
+    def __init__(self, args: List[List[Union[int, float]]]):
         """Set attributes for object
 
         Parameters
         ----------
-        args : list
+        args : List[List[Union[int, float]]]
             List of lists representing elements of matrix.
             Example of input: [[1, 2], [3, 4]].
 
@@ -119,12 +121,12 @@ class Matrix:
         return Matrix(new_el)
 
 
-def is_matrix(args: list):
+def is_matrix(args: List[List[Union[int, float]]]):
     """Check if input has form of matrix.
 
     Parameters
     ----------
-    args : list
+    args : List[List[Union[int, float]]]
         List of lists representing elements of matrix.
         Example of input: [[1, 2], [3, 4]].
 
