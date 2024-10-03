@@ -53,7 +53,7 @@ class Matrix:
         is_matrix(args)
         self.elements = args
 
-    def __add__(self, matrix):
+    def __add__(self, matrix: "Matrix"):
         """Add matricies and return new matrix
 
         Parameters
@@ -81,7 +81,7 @@ class Matrix:
             new_elements.append(new_row)
         return Matrix(new_elements)
 
-    def __mul__(self, matrix):
+    def __mul__(self, matrix: "Matrix"):
         """Multiply matrices and return new matrix
 
         Parameters

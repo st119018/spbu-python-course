@@ -6,6 +6,7 @@ Vector
 """
 
 from math import acos
+from typing import List, Union
 
 
 class Vector:
@@ -28,12 +29,12 @@ class Vector:
         Calculate angle between vectors
     """
 
-    def __init__(self, args: list):
+    def __init__(self, args: List[Union[int, float]]):
         """Set attribute for object.
 
         Parameters
         ----------
-        args : list
+        args : List[Union[int, float]]
             List of coordinates of vector
 
         Raises
@@ -60,7 +61,7 @@ class Vector:
         """Return dimension of vector."""
         return len(self.coord)
 
-    def scalar_product(self, vect):
+    def scalar_product(self, vect: "Vector"):
         """Return scalar product of vectors.
 
         Parameters
@@ -84,7 +85,7 @@ class Vector:
         else:
             raise IndexError("Different dimensions of vectors")
 
-    def angle(self, vect) -> float:
+    def angle(self, vect: "Vector") -> float:
         """Return angle between vectors in radians.
         The result is between 0 and pi.
 
