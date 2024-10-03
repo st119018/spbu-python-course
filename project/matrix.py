@@ -9,7 +9,7 @@ Functions
 is_matrix(args)
 """
 
-from typing import List, Union
+from typing import List
 
 
 class Matrix:
@@ -17,7 +17,7 @@ class Matrix:
 
     Attributes
     ----------
-    elements : List[List[Union[int, float]]]
+    elements : List[List[float]]
         List of lists; elements of matrix
 
     Methods
@@ -30,12 +30,12 @@ class Matrix:
         Transpose matrix
     """
 
-    def __init__(self, args: List[List[Union[int, float]]]):
+    def __init__(self, args: List[List[float]]):
         """Set attributes for object
 
         Parameters
         ----------
-        args : List[List[Union[int, float]]]
+        args : List[List[float]]
             List of lists representing elements of matrix.
             Example of input: [[1, 2], [3, 4]].
 
@@ -75,9 +75,9 @@ class Matrix:
             raise IndexError("Different size of matrices")
         new_elements = []
         for i in range(rows):
-            new_row = [0] * col
+            new_row = []
             for j in range(col):
-                new_row[j] += self.elements[i][j] + matrix.elements[i][j]
+                new_row.append(self.elements[i][j] + matrix.elements[i][j])
             new_elements.append(new_row)
         return Matrix(new_elements)
 
@@ -103,7 +103,7 @@ class Matrix:
             raise IndexError("Matrices can't be multiplied")
         new_elements = []
         for i in range(rows):
-            new_row = [0] * len(matrix.elements[0])
+            new_row = [0.0] * len(matrix.elements[0])
             for j in range(len(matrix.elements[0])):
                 for k in range(col):
                     new_row[j] += self.elements[i][k] * matrix.elements[k][j]
@@ -114,19 +114,19 @@ class Matrix:
         """Return transposed matrix"""
         new_el = []
         for j in range(len(self.elements[0])):
-            new_row = [0] * len(self.elements)
+            new_row = []
             for i in range(len(self.elements)):
-                new_row[i] += self.elements[i][j]
+                new_row.append(self.elements[i][j])
             new_el.append(new_row)
         return Matrix(new_el)
 
 
-def is_matrix(args: List[List[Union[int, float]]]):
+def is_matrix(args: List[List[float]]):
     """Check if input has form of matrix.
 
     Parameters
     ----------
-    args : List[List[Union[int, float]]]
+    args : List[List[float]]
         List of lists representing elements of matrix.
         Example of input: [[1, 2], [3, 4]].
 

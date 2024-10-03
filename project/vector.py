@@ -6,7 +6,7 @@ Vector
 """
 
 from math import acos
-from typing import List, Union
+from typing import List
 
 
 class Vector:
@@ -14,7 +14,7 @@ class Vector:
 
     Attributes
     ----------
-    coord : list
+    coord : List[float]
         Coordinates of vector
 
     Methods
@@ -29,12 +29,12 @@ class Vector:
         Calculate angle between vectors
     """
 
-    def __init__(self, args: List[Union[int, float]]):
+    def __init__(self, args: List[float]):
         """Set attribute for object.
 
         Parameters
         ----------
-        args : List[Union[int, float]]
+        args : List[float]
             List of coordinates of vector
 
         Raises
@@ -52,7 +52,7 @@ class Vector:
 
     def length(self) -> float:
         """Return length of vector."""
-        l = 0
+        l = 0.0
         for x in self.coord:
             l += x**2
         return l**0.5
@@ -78,7 +78,7 @@ class Vector:
         if type(vect) != Vector:
             raise TypeError(f"Incorrect type: {type(vect)}, " "expected: Vector.")
         if self.dim() == vect.dim():
-            sum = 0
+            sum = 0.0
             for i in range(self.dim()):
                 sum += self.coord[i] * vect.coord[i]
             return sum
