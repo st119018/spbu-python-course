@@ -9,7 +9,7 @@ from functools import wraps
 from typing import Callable
 
 
-def cache_results(cache_size=0):
+def cache_results(cache_size: int = 0):
     """Decorator for caching function results.
     Keep finite number of last input arguments and corresponding results.
 
