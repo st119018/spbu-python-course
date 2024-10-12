@@ -68,7 +68,7 @@ def uncurry_explicit(func: Callable, arity: int):
     ValueError
         If arity is negative.
     TypeError
-        If function takes 0 arguments but argument was given.
+        If number of given arguments isn't equal to arity.
 
     Returns
     -------
