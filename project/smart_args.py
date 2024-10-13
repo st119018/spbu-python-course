@@ -80,17 +80,21 @@ def smart_args(func: Callable):
 
         new_kwargs = {}
         for name, param in params.items():
-            if name in kwargs and not isinstance(param.default, Isolated):
+            if name in kwargs and not isinstance(param.default, (Isolated, Evaluated)):
                 new_kwargs[name] = kwargs[name]
 
             else:
                 if isinstance(param.default, Evaluated):
                     d_value = param.default.func
-                    if isinstance(d_value, Isolated):
+                    if d_value == Isolated:
                         raise ValueError(
                             "Isolated was passed as argument to Evaluated."
                         )
-                    new_kwargs[name] = d_value()
+
+                    if name in kwargs:
+                        new_kwargs[name] = kwargs[name]
+                    else:
+                        new_kwargs[name] = d_value()
                 if isinstance(param.default, Isolated):
                     if name in kwargs:
                         new_kwargs[name] = copy.deepcopy(kwargs[name])
