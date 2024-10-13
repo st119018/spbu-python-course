@@ -7,6 +7,7 @@ cache_results(cache_size)"""
 
 from functools import wraps
 from typing import Callable
+from collections import OrderedDict
 
 
 def cache_results(cache_size: int = 0):
@@ -24,12 +25,13 @@ def cache_results(cache_size: int = 0):
     """
 
     def decorator(func: Callable):
-        cache = {}
+        cache = OrderedDict()
 
         @wraps(func)
         def caching(*args, **kwargs):
             key = (tuple(args), hash(tuple(sorted(kwargs.items()))))
             if key in cache:
+                cache.move_to_end(key)
                 return cache[key]
 
             result = func(*args, **kwargs)
