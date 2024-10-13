@@ -4,6 +4,7 @@ uncurrying functions.
 Functions
 ---------
 curry_explicit(func, arity)
+
 uncurry_explicit(func, arity)
 """
 
