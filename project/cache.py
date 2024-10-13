@@ -3,11 +3,21 @@ function execution.
 
 Functions
 ---------
+get_hash(arg)
+
 cache_results(cache_size)"""
 
 from functools import wraps
-from typing import Callable
+from typing import Callable, Any
 from collections import OrderedDict
+import hashlib
+import json
+
+
+def get_hash(arg: Any) -> str:
+    """Return hash value of arg."""
+    json_str = json.dumps(arg, sort_keys=True, ensure_ascii=False).encode("utf8")
+    return hashlib.sha256(json_str).hexdigest()
 
 
 def cache_results(cache_size: int = 0):
@@ -25,11 +35,11 @@ def cache_results(cache_size: int = 0):
     """
 
     def decorator(func: Callable):
-        cache = OrderedDict()
+        cache = OrderedDict[str, str]()
 
         @wraps(func)
         def caching(*args, **kwargs):
-            key = (tuple(args), hash(tuple(sorted(kwargs.items()))))
+            key = get_hash(args), get_hash(kwargs)
             if key in cache:
                 cache.move_to_end(key)
                 return cache[key]
