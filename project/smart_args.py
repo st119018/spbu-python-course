@@ -61,8 +61,8 @@ def smart_args(func: Callable):
     ------
     AssertionError
         If Evaluated or Isolated is passed as arguments.
-        If Isolated is passed as argument to Evaluated.
     ValueError
+        If Isolated is passed as argument to Evaluated.
         If default value is Isolated but argument wasn't passed.
 
     Returns
@@ -86,9 +86,10 @@ def smart_args(func: Callable):
             else:
                 if isinstance(param.default, Evaluated):
                     d_value = param.default.func
-                    assert isinstance(
-                        d_value, Isolated
-                    ), "Isolated was passed as argument to Evaluated."
+                    if isinstance(d_value, Isolated):
+                        raise ValueError(
+                            "Isolated was passed as argument to Evaluated."
+                        )
                     new_kwargs[name] = d_value()
                 if isinstance(param.default, Isolated):
                     if name in kwargs:
