@@ -35,7 +35,7 @@ def cache_results(cache_size: int = 0):
     """
 
     def decorator(func: Callable):
-        cache = OrderedDict[str, str]()
+        cache: OrderedDict[str, str] = OrderedDict()
 
         @wraps(func)
         def caching(*args, **kwargs):
