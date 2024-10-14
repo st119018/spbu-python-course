@@ -10,7 +10,7 @@ from project.rgba import get_rgba_vector, rgba_generator
         (51, (0, 0, 1, 0)),
     ],
 )
-def test_rgba_vector(index: int, vector: tuple[int]):
+def test_rgba_vector(index, vector):
     rgba = get_rgba_vector(index)
     assert vector == rgba
 
