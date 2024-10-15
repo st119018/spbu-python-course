@@ -8,6 +8,7 @@ get_prime(func)
 """
 
 from typing import Callable
+from functools import wraps
 
 
 def prime_generator():
@@ -28,6 +29,11 @@ def get_prime(func: Callable):
     """Decorator returns function that calculate k-th prime number.
     Counting starts with 1.
 
+    Parameters
+    ----------
+    func : Callable
+        Generator of prime numbers
+
     Raises
     ------
     ValueError
@@ -37,15 +43,24 @@ def get_prime(func: Callable):
     -------
     Function
     """
+    gen = func()
+    last = [0]
 
+    @wraps(func)
     def wrapper(k: int = 1):
-        if k <= 0:
+        """Returns k-th prime number in increasing sequence.
+        Counting starts with 1.
+        """
+        if k <= 0 or k <= last[0]:
             raise ValueError("Inappropriate value.")
 
-        gen = prime_generator()
+        k -= last[0]
+        last[0] += k
+
         for _ in range(k - 1):
             next(gen)
         prime = next(gen)
+
         return prime
 
     return wrapper
