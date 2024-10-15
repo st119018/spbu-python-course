@@ -14,7 +14,7 @@ def test_prime_evenly_increasing_sequence(k, prime):
 
 
 @pytest.mark.parametrize(
-    "k, prime", [(1, 2), (2, 3), (5, 11), (20, 71), (21, 73), (27, 103)]
+    "k, prime", [(1, 2), (2, 3), (2, 3), (20, 71), (20, 71), (27, 103)]
 )
 def test_prime_unevenly_increasing_sequence(k, prime):
     @get_prime

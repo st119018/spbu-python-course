@@ -44,23 +44,27 @@ def get_prime(func: Callable):
     Function
     """
     gen = func()
-    last = [0]
+    last_k = [0]  # last value of k
+    last_prime = [0]  # last returned prime
 
     @wraps(func)
     def wrapper(k: int = 1):
-        """Returns k-th prime number in increasing sequence.
+        """Returns k-th prime number in non-decreasing sequence.
         Counting starts with 1.
         """
-        if k <= 0 or k <= last[0]:
+        if k <= 0 or k < last_k[0]:
             raise ValueError("Inappropriate value.")
 
-        k -= last[0]
-        last[0] += k
+        if last_k[0] == k:
+            return last_prime[0]
+
+        k -= last_k[0]
+        last_k[0] += k
 
         for _ in range(k - 1):
             next(gen)
-        prime = next(gen)
+        last_prime[0] = next(gen)
 
-        return prime
+        return last_prime[0]
 
     return wrapper
