@@ -27,8 +27,11 @@ def test_curry_built_in():
     assert f(5)(3) == (1, 2)
 
 
-def test_curry_built_in_wrong_arity():
-    f = curry_explicit(print, 3)
+def test_curry_built_in_with_arbitrary_arity():
+    f = curry_explicit(max, 3)
+    assert f(5)(2)(56) == 56
+
+    # number of arguments of f is frozen and can't exceed 3
     with pytest.raises(TypeError):
         f(1)(2)(3)(6, 6)
 
@@ -62,8 +65,11 @@ def test_uncurry_built_in():
     assert g(5, 3) == (1, 2)
 
 
-def test_uncurry_built_in_wrong_arity():
-    f = curry_explicit(print, 3)
+def test_uncurry_built_in_with_arbitrary_arity():
+    f = curry_explicit(max, 3)
     g = uncurry_explicit(f, 3)
+    assert g(4, 7, 9) == 9
+
+    # number of arguments of g is frozen and can't exceed 3
     with pytest.raises(TypeError):
         g(1, 2, 3, 9)
