@@ -9,7 +9,7 @@ uncurry_explicit(func, arity)
 """
 
 from functools import wraps
-from typing import Callable
+from typing import Callable, Any, List
 
 
 def curry_explicit(func: Callable, arity: int):
@@ -36,7 +36,7 @@ def curry_explicit(func: Callable, arity: int):
     if arity < 0:
         raise ValueError("Arity cannot be negative")
 
-    args = []
+    args: List[Any] = []
 
     @wraps(func)
     def curry_func(arg=None):
@@ -48,8 +48,7 @@ def curry_explicit(func: Callable, arity: int):
             raise TypeError("Inappropriate number of arguments")
         args.append(arg)
         if len(args) == arity:
-            g = func(*args)
-            return g
+            return func(*args)
         else:
             return curry_func
 
