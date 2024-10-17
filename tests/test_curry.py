@@ -33,7 +33,7 @@ def test_curry_built_in_with_arbitrary_arity():
 
     # number of arguments of f is frozen and can't exceed 3
     with pytest.raises(TypeError):
-        f(1)(2)(3)(6, 6)
+        f(1)(2)(3)(6)
 
 
 def test_uncurry():

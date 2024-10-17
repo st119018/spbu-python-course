@@ -44,10 +44,14 @@ def curry_explicit(func: Callable, arity: int):
             raise TypeError("Arity is 0 but argument was given")
         if arity == 0:
             return func()
+        if len(args) > arity:
+            raise TypeError("Inappropriate number of arguments")
         args.append(arg)
         if len(args) == arity:
-            return func(*args)
-        return lambda next_arg: curry_func(next_arg)
+            g = func(*args)
+            return g
+        else:
+            return curry_func
 
     return curry_func
 
