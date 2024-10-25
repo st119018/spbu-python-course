@@ -1,5 +1,5 @@
 import pytest
-from project.rgba import get_rgba_vector, rgba_generator
+from project.generator.rgba import get_rgba_vector, rgba_generator
 
 
 @pytest.mark.parametrize(

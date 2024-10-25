@@ -1,7 +1,7 @@
 """This module provides test for vector operations"""
 
 import pytest
-from project.vector import Vector
+from project.linalg.vector import Vector
 
 
 def test_init():

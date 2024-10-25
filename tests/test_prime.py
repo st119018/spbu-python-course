@@ -1,5 +1,5 @@
 import pytest
-from project.prime import get_prime, prime_generator
+from project.generator.prime import get_prime, prime_generator
 
 # without parametrize
 def test_prime_evenly_increasing_sequence():

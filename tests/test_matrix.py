@@ -1,7 +1,7 @@
 """This module provides test for matrix operations"""
 
 import pytest
-from project.matrix import Matrix
+from project.linalg.matrix import Matrix
 
 
 def test_init():

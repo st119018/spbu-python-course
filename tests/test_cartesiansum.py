@@ -1,5 +1,5 @@
 import pytest
-from project.cartesian_sum import cartesian_product_sum
+from project.threadpool.cartesian_sum import cartesian_product_sum
 
 
 @pytest.mark.parametrize(

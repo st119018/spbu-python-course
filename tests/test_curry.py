@@ -1,5 +1,5 @@
 import pytest
-from project.curry import curry_explicit, uncurry_explicit
+from project.decorators.curry import curry_explicit, uncurry_explicit
 
 
 def test_curry():

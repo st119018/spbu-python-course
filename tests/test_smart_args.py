@@ -1,5 +1,5 @@
 import pytest
-from project.smart_args import Evaluated, Isolated, smart_args
+from project.decorators.smart_args import Evaluated, Isolated, smart_args
 
 
 def test_smart_args_Evaluated():

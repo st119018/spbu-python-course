@@ -1,4 +1,4 @@
-from project.cache import cache_results
+from project.decorators.cache import cache_results
 from typing import List
 
 

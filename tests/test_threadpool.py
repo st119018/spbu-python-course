@@ -2,7 +2,7 @@ import pytest
 import time
 import threading
 from math import ceil
-from project.threadpool import ThreadPool
+from project.threadpool.threadpool import ThreadPool
 
 
 def some_func(sec: int):
