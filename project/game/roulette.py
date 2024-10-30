@@ -72,7 +72,7 @@ class Roulette:
         self.verbose = verbose
         self.verbose_file = verbose_file
         self.is_over = False
-        self.current_round = 1
+        self.current_round = 0
         self.file_name = "project/game/example/example.txt"
         self.wheel = Wheel()
         self.bankrupts: Set[int] = set()
@@ -221,7 +221,7 @@ class Roulette:
         """Determine if game is over and set is_over flag to True"""
         if (
             len(self.bankrupts) >= len(self.bots) - 1
-            or self.current_round > self.rounds_num
+            or self.current_round == self.rounds_num
         ):
             self.is_over = True
 

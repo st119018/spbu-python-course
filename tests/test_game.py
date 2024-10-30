@@ -58,11 +58,11 @@ def test_game_roulette(roulette):
 
 
 def test_game_play_round(roulette):
-    assert roulette.current_round == 1
+    assert roulette.current_round == 0
 
     roulette.play_round(1, 100)
 
-    assert roulette.current_round == 2
+    assert roulette.current_round == 1
     # all bots made bet
     for bot in roulette.bots:
         assert bot.last_bet.bet_type != "none"
