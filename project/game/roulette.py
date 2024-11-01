@@ -131,7 +131,7 @@ class Roulette:
         ------
         None
         """
-        self.write("=== ROUND " + str(self.current_round) + " ===\n\n")
+        self.write("=== ROUND " + str(self.current_round + 1) + " ===\n\n")
         pocket = self.wheel.spin()
 
         self.write("The wheel is spinning\n\n")
