@@ -185,7 +185,6 @@ class Roulette:
         for i in range(len(self.bots)):
             if not self.bots[i].is_bankrupt(min_bet):
                 # check if color or number matches
-                # if self.bots[i].last_bet.bet_type == "color":
                 if self.bots[i].last_bet.color == pocket.color:
                     winners.add(i)
                 elif pocket.num in self.bots[i].last_bet.numbers:
