@@ -33,6 +33,7 @@ class Wheel:
         self._pockets_num = 37
         self._pockets = [Pocket()]
 
+        numbers_of_same_color = (10, 18, 28)
         # make pockets on wheel
         flag = True
         for i in range(1, self._pockets_num):
@@ -41,7 +42,9 @@ class Wheel:
             else:
                 self._pockets.append(Pocket(i, "black"))
 
-            if i not in (10, 18, 28):
+            # color of all pockets alternates
+            # except for pairs (10, 11), (18, 19), (28, 29)
+            if i not in numbers_of_same_color:
                 flag = not flag
 
     @property
