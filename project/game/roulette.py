@@ -54,6 +54,8 @@ class Roulette:
         rounds_num: int = 10,
         verbose: bool = False,
         verbose_file: bool = False,
+        *,
+        file_name="project/game/example/example.txt",
     ):
         """Set attribites
 
@@ -67,6 +69,8 @@ class Roulette:
             Flag to signal whether to write to file
         verbose : bool
             Flag to signal whether to print info
+        file_name
+            Path to file
         """
         self.bots = bots
         self.rounds_num = rounds_num
@@ -74,7 +78,7 @@ class Roulette:
         self.verbose_file = verbose_file
         self.is_over = False
         self.current_round = 0
-        self.file_name = "project/game/example/example.txt"
+        self.file_name = file_name
         self.wheel = Wheel()
         self.bankrupts: Set[int] = set()
 
