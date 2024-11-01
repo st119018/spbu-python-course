@@ -13,19 +13,19 @@ class Roulette:
         List of bots that play roulette
     rounds_num : int
         Maximum number of rounds
-    verbose : bool
+    _verbose : bool
         Flag to signal whether to print info
-    verbose_file : bool
+    _verbose_file : bool
         Flag to signal whether to write to file
-    is_over : bool
+    _is_over : bool
         Flag that indicates end of game
     current_round : int
         Number of round that is currently played
-    file_name : str
+    _file_name : str
         Path to file that stores example of playing game
-    wheel : Wheel
+    _wheel : Wheel
         Wheel to determine winning pocket
-    bankrupts: Set[int]
+    _bankrupts: Set[int]
         Indexes of bots with no money to play
 
     Methods
@@ -34,18 +34,18 @@ class Roulette:
         Start and play roulette
     play_round(min_bet, max_bet)
         Play one round of game
-    determine_round_winners(min_bet, pocket)
+    _determine_round_winners(min_bet, pocket)
         Determine winners of current round
-    pay_off(bot)
+    _pay_off(bot)
         Calculate winning amount
-    over(bankrupts)
+    _over()
         Determine if game is over
-    game_state(min_bet, winners)
+    _game_state(min_bet, winners)
         Get current state of game
-    get_bets(min_bet)
+    _get_bets(min_bet)
         Get bets made in current round
-    write(msg)
-        Write msg to file and print it if verbose is True
+    _write(msg)
+        Write msg to file and print it if _verbose is True
     """
 
     def __init__(
@@ -74,18 +74,18 @@ class Roulette:
         """
         self.bots = bots
         self.rounds_num = rounds_num
-        self.verbose = verbose
-        self.verbose_file = verbose_file
-        self.is_over = False
+        self._verbose = verbose
+        self._verbose_file = verbose_file
+        self._is_over = False
         self.current_round = 0
-        self.file_name = file_name
-        self.wheel = Wheel()
-        self.bankrupts: Set[int] = set()
+        self._file_name = file_name
+        self._wheel = Wheel()
+        self._bankrupts: Set[int] = set()
 
     def play(self, min_bet: int = 1, max_bet: int = 100) -> Tuple[List[Bot], List[Bot]]:
         """Start and play roulette game. Return winners and losers of game
 
-        If verbose flag is True then print process of game.
+        If _verbose flag is True then print process of game.
 
         Parameters
         ----------
@@ -98,17 +98,17 @@ class Roulette:
         ------
         Tuple[List[Bot], List[Bot]]
         """
-        self.write("Roulette\n\n")
-        self.write(f"Minimum bet: {min_bet}\n")
-        self.write(f"Maximum bet: {max_bet}\n")
-        self.write(f"Number of rounds: {self.rounds_num}\n\n")
-        self.write(self.game_state(min_bet, set()))
+        self._write("Roulette\n\n")
+        self._write(f"Minimum bet: {min_bet}\n")
+        self._write(f"Maximum bet: {max_bet}\n")
+        self._write(f"Number of rounds: {self.rounds_num}\n\n")
+        self._write(self._game_state(min_bet, set()))
 
-        while not self.is_over:
+        while not self._is_over:
             self.play_round(min_bet, max_bet)
-            self.over()
+            self._over()
 
-        self.write("\nGame is over\n\n")
+        self._write("\nGame is over\n\n")
         game_winners: List[Bot] = []
         game_losers: List[Bot] = []
         # show winners and losers of game
@@ -117,7 +117,7 @@ class Roulette:
                 game_winners.append(bot)
             else:
                 game_losers.append(bot)
-            self.write(bot.name + (" won\n" if bot.won() else " lost\n"))
+            self._write(bot.name + (" won\n" if bot.won() else " lost\n"))
 
         return (game_winners, game_losers)
 
@@ -135,24 +135,24 @@ class Roulette:
         ------
         None
         """
-        self.write("=== ROUND " + str(self.current_round + 1) + " ===\n\n")
-        pocket = self.wheel.spin()
+        self._write("=== ROUND " + str(self.current_round + 1) + " ===\n\n")
+        pocket = self._wheel.spin()
 
-        self.write("The wheel is spinning\n\n")
+        self._write("The wheel is spinning\n\n")
 
         # bots make bet
         for i in range(len(self.bots)):
             if not self.bots[i].is_bankrupt(min_bet):
-                self.bots[i].bet(min_bet, max_bet, self.wheel.pockets_num)
+                self.bots[i].bet(min_bet, max_bet, self._wheel.pockets_num)
             else:
-                self.bankrupts.add(i)
+                self._bankrupts.add(i)
 
-        self.write(self.get_bets(min_bet))
-        self.write(
+        self._write(self._get_bets(min_bet))
+        self._write(
             f"The winning number and color: {str(pocket.num)} {str(pocket.color)}\n\n"
         )
 
-        winners = self.determine_round_winners(min_bet, pocket)
+        winners = self._determine_round_winners(min_bet, pocket)
 
         # collect bets and give the winnings to winners
         for i in range(len(self.bots)):
@@ -161,12 +161,12 @@ class Roulette:
                 self.bots[i].balance -= sum(self.bots[i].last_bet.amount)
                 if i in winners:
                     self.bots[i].last_result = True
-                    self.bots[i].balance += self.pay_off(self.bots[i])
+                    self.bots[i].balance += self._pay_off(self.bots[i])
 
-        self.write(self.game_state(min_bet, winners))
+        self._write(self._game_state(min_bet, winners))
         self.current_round += 1
 
-    def determine_round_winners(self, min_bet: int, pocket: Pocket) -> Set[int]:
+    def _determine_round_winners(self, min_bet: int, pocket: Pocket) -> Set[int]:
         """Determine winners of current round and return their indexes
 
         Parameters
@@ -193,7 +193,7 @@ class Roulette:
 
         return winners
 
-    def pay_off(self, bot: Bot) -> int:
+    def _pay_off(self, bot: Bot) -> int:
         """Calculate winning amount in current round
 
         Parameters
@@ -218,15 +218,15 @@ class Roulette:
 
         return won
 
-    def over(self) -> None:
-        """Determine if game is over and set is_over flag to True"""
+    def _over(self) -> None:
+        """Determine if game is over and set _is_over flag to True"""
         if (
-            len(self.bankrupts) >= len(self.bots) - 1
+            len(self._bankrupts) >= len(self.bots) - 1
             or self.current_round == self.rounds_num
         ):
-            self.is_over = True
+            self._is_over = True
 
-    def game_state(self, min_bet: int, winners: Set[int]) -> str:
+    def _game_state(self, min_bet: int, winners: Set[int]) -> str:
         """Return current state of game as a string"""
 
         msg = "Current game state:\n-------------------\n"
@@ -252,7 +252,7 @@ class Roulette:
         msg += bot_msg + "\n" + win_msg + "\n" + lose_msg + "\n\n"
         return msg
 
-    def get_bets(self, min_bet: int) -> str:
+    def _get_bets(self, min_bet: int) -> str:
         """Return bets made by bots in current round as a string
 
         Parameters
@@ -281,14 +281,14 @@ class Roulette:
 
         return msg + "\n\n"
 
-    def write(self, msg: str) -> None:
-        """Write msg to file if verbose_file flag is True
+    def _write(self, msg: str) -> None:
+        """Write msg to file if _verbose_file flag is True
 
-        If verbose flag is True then print msg
+        If _verbose flag is True then print msg
         """
-        if self.verbose_file:
-            with open(self.file_name, "a") as f:
+        if self._verbose_file:
+            with open(self._file_name, "a") as f:
                 f.write(msg)
 
-        if self.verbose:
+        if self._verbose:
             print(msg, end="")
