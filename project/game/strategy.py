@@ -1,7 +1,32 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import List, Dict
+
 from dataclasses import dataclass, field
 import random
+
+
+@dataclass(frozen=True)
+class BetTypes:
+    """Data-class for determining type of bet and winning rate of bet
+
+    Attributes
+    ----------
+    color: str
+        Type of bet
+    single: str
+        Type of bet
+    dozen: str
+        Type of bet
+    payout_ratio: Dict[str, int]
+        Winning payout ratio
+    """
+
+    color: str = "color"
+    single: str = "single"
+    dozen: str = "dozen"
+    payout_ratio: Dict[str, int] = field(
+        default_factory=lambda: {"color": 2, "single": 36, "dozen": 3}
+    )
 
 
 @dataclass
@@ -95,7 +120,7 @@ class RandomStrategy(Strategy):
         Bet
         """
         if balance < min_bet:
-            return Bet(bet_type="none")
+            return Bet()
 
         chips_num = min(balance // min_bet, pockets_num // 2, max_bet // min_bet)
 
@@ -142,7 +167,7 @@ class MartingaleStrategy(Strategy):
         Bet
         """
         if balance < min_bet:
-            return Bet(bet_type="none")
+            return Bet()
 
         bet_color = random.choice(["red", "black"])
         if self._is_first or last:
@@ -196,7 +221,7 @@ class DozenStrategy(Strategy):
         Bet
         """
         if balance < min_bet:
-            return Bet(bet_type="none")
+            return Bet()
 
         # choose one of three dozens
         num_dozen = random.choice([i + 1 for i in range(self._dozen_number)])

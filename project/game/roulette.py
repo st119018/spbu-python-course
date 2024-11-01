@@ -1,4 +1,5 @@
 from project.game.bot import Bot
+from project.game.strategy import BetTypes
 from project.game.wheel import Wheel, Pocket
 from typing import List, Set, Tuple
 
@@ -35,7 +36,7 @@ class Roulette:
         Play one round of game
     determine_round_winners(min_bet, pocket)
         Determine winners of current round
-    pay_off(bot, pockets_num)
+    pay_off(bot)
         Calculate winning amount
     over(bankrupts)
         Determine if game is over
@@ -156,9 +157,7 @@ class Roulette:
                 self.bots[i].balance -= sum(self.bots[i].last_bet.amount)
                 if i in winners:
                     self.bots[i].last_result = True
-                    self.bots[i].balance += self.pay_off(
-                        self.bots[i], self.wheel.pockets_num
-                    )
+                    self.bots[i].balance += self.pay_off(self.bots[i])
 
         self.write(self.game_state(min_bet, winners))
         self.current_round += 1
@@ -181,19 +180,16 @@ class Roulette:
         winners: Set[int] = set()
         for i in range(len(self.bots)):
             if not self.bots[i].is_bankrupt(min_bet):
-                if self.bots[i].last_bet.bet_type == "none":
-                    continue
-
                 # check if color or number matches
-                if self.bots[i].last_bet.bet_type == "color":
-                    if self.bots[i].last_bet.color == pocket.color:
-                        winners.add(i)
+                # if self.bots[i].last_bet.bet_type == "color":
+                if self.bots[i].last_bet.color == pocket.color:
+                    winners.add(i)
                 elif pocket.num in self.bots[i].last_bet.numbers:
                     winners.add(i)
 
         return winners
 
-    def pay_off(self, bot: Bot, pockets_num: int) -> int:
+    def pay_off(self, bot: Bot) -> int:
         """Calculate winning amount in current round
 
         Parameters
@@ -208,13 +204,14 @@ class Roulette:
         int
         """
         won = 0
-        match bot.last_bet.bet_type:
-            case "single":
-                won = bot.last_bet.amount[0] * (pockets_num - 1)
-            case "color":
-                won = bot.last_bet.amount[0] * 2
-            case "dozen":
-                won = sum(bot.last_bet.amount) * 3
+        bet = bot.last_bet
+        bet_types = BetTypes()
+        match bet.bet_type:
+            case BetTypes.single:
+                won = bet.amount[0] * bet_types.payout_ratio[bet_types.single]
+            case bet_types.color | bet_types.dozen:
+                won = sum(bet.amount) * bet_types.payout_ratio[bet.bet_type]
+
         return won
 
     def over(self) -> None:
@@ -259,15 +256,20 @@ class Roulette:
         min_bet : int
             Minimum possible bet
         """
+        bet_types = BetTypes()
         msg = "Bets:\n----"
         for bot in self.bots:
             if not bot.is_bankrupt(min_bet):
-                msg += "\n    " + bot.name + " made a bet on "
+                msg += (
+                    "\n    "
+                    + bot.name
+                    + f" made a bet with {sum(bot.last_bet.amount)} chips on "
+                )
                 bet = bot.last_bet
                 match bet.bet_type:
-                    case "color":
+                    case bet_types.color:
                         msg += bet.color + " (color)"
-                    case "single" | "dozen":
+                    case bet_types.single | bet_types.dozen:
                         msg += (
                             "".join(map(lambda n: str(n) + " ", bet.numbers))
                             + f"({bet.bet_type})"
