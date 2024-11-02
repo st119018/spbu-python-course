@@ -1,7 +1,6 @@
 from project.game.bot import Bot
-from project.game.strategy import BetTypes
 from project.game.wheel import Wheel, Pocket
-from typing import List, Set, Tuple
+from typing import List, Set, Tuple, Dict
 
 
 class Roulette:
@@ -206,14 +205,10 @@ class Roulette:
         ------
         int
         """
-        won = 0
+        payout_ratio: Dict[str, int] = {"color": 2, "single": 36, "dozen": 3}
+
         bet = bot.last_bet
-        bet_types = BetTypes()
-        match bet.bet_type:
-            case BetTypes.single:
-                won = bet.amount[0] * bet_types.payout_ratio[bet_types.single]
-            case bet_types.color | bet_types.dozen:
-                won = sum(bet.amount) * bet_types.payout_ratio[bet.bet_type]
+        won = bet.amount[0] * payout_ratio[bet.bet_type]
 
         return won
 
@@ -259,7 +254,6 @@ class Roulette:
         min_bet : int
             Minimum possible bet
         """
-        bet_types = BetTypes()
         msg = "Bets:\n----"
         for bot in self.bots:
             if not bot.is_bankrupt(min_bet):
@@ -269,14 +263,13 @@ class Roulette:
                     + f" made a bet with {sum(bot.last_bet.amount)} chips on "
                 )
                 bet = bot.last_bet
-                match bet.bet_type:
-                    case bet_types.color:
-                        msg += bet.color + " (color)"
-                    case bet_types.single | bet_types.dozen:
-                        msg += (
-                            "".join(map(lambda n: str(n) + " ", bet.numbers))
-                            + f"({bet.bet_type})"
-                        )
+                if len(bet.color) != 0:
+                    msg += bet.color + " (color)"
+                elif len(bet.numbers) != 0:
+                    msg += (
+                        "".join(map(lambda n: str(n) + " ", bet.numbers))
+                        + f"({bet.bet_type})"
+                    )
 
         return msg + "\n\n"
 

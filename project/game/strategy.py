@@ -5,30 +5,6 @@ from dataclasses import dataclass, field
 import random
 
 
-@dataclass(frozen=True)
-class BetTypes:
-    """Data-class for determining type of bet and winning rate of bet
-
-    Attributes
-    ----------
-    color: str
-        Type of bet
-    single: str
-        Type of bet
-    dozen: str
-        Type of bet
-    payout_ratio: Dict[str, int]
-        Winning payout ratio
-    """
-
-    color: str = "color"
-    single: str = "single"
-    dozen: str = "dozen"
-    payout_ratio: Dict[str, int] = field(
-        default_factory=lambda: {"color": 2, "single": 36, "dozen": 3}
-    )
-
-
 @dataclass
 class Bet:
     """Data-class that implements bet
@@ -232,7 +208,6 @@ class DozenStrategy(Strategy):
             i + 1 for i in range(numbers_bet * (num_dozen - 1), numbers_bet * num_dozen)
         ]
         bet_amount = [
-            min_bet
-            for _ in range(min(balance // min_bet, numbers_bet, max_bet // min_bet))
+            min_bet * min(balance // min_bet, numbers_bet, max_bet // min_bet)
         ]
         return Bet(numbers=bet_numbers, amount=bet_amount, bet_type="dozen")
