@@ -1,3 +1,4 @@
+from project.game.strategy import ColorTypes
 from dataclasses import dataclass
 import random
 
@@ -38,9 +39,9 @@ class Wheel:
         flag = True
         for i in range(1, self._pockets_num):
             if flag:
-                self._pockets.append(Pocket(i, "red"))
+                self._pockets.append(Pocket(i, ColorTypes.Red.value))
             else:
-                self._pockets.append(Pocket(i, "black"))
+                self._pockets.append(Pocket(i, ColorTypes.Black.value))
 
             # color of all pockets alternates
             # except for pairs (10, 11), (18, 19), (28, 29)

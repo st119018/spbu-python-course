@@ -16,9 +16,9 @@ def test_game_wheel():
 @pytest.mark.parametrize(
     "strategy, bet_type",
     [
-        (RandomStrategy(), "single"),
-        (MartingaleStrategy(), "color"),
-        (DozenStrategy(), "dozen"),
+        (RandomStrategy(), 36),
+        (MartingaleStrategy(), 2),
+        (DozenStrategy(), 3),
     ],
 )
 def test_game_strategy(strategy, bet_type):
@@ -26,7 +26,7 @@ def test_game_strategy(strategy, bet_type):
     bot = Bot(strategy, 100)
     bot.bet(1, 100, wheel.pockets_num)
 
-    assert bot.last_bet.bet_type == bet_type
+    assert bot.last_bet.bet_type.value == bet_type
     assert sum(bot.last_bet.amount) <= bot.balance
 
 
@@ -43,11 +43,11 @@ def test_game_bot():
 
 @pytest.fixture
 def roulette():
-    bot1 = Bot(RandomStrategy(), 100)
-    bot2 = Bot(MartingaleStrategy(), 100)
-    bot3 = Bot(DozenStrategy(), 100)
+    bot1 = Bot(RandomStrategy(), 100, "bot1")
+    bot2 = Bot(MartingaleStrategy(), 100, "bot2")
+    bot3 = Bot(DozenStrategy(), 100, "bot3")
     bots = [bot1, bot2, bot3]
-    return Roulette(bots)
+    return Roulette(bots, verbose_file=True)
 
 
 def test_game_roulette(roulette):
@@ -63,6 +63,3 @@ def test_game_play_round(roulette):
     roulette.play_round(1, 100)
 
     assert roulette.current_round == 1
-    # all bots made bet
-    for bot in roulette.bots:
-        assert bot.last_bet.bet_type != "none"

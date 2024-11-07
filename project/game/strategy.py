@@ -1,8 +1,38 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict
-
+from typing import List
+from enum import Enum
 from dataclasses import dataclass, field
 import random
+
+
+class ColorTypes(Enum):
+    """Possible colors to bet on
+
+    Attibutes
+    ---------
+    Black : str
+    Red : str
+    """
+
+    Black: str = "black"
+    Red: str = "red"
+
+
+class BetTypes(Enum):
+    """Types of bet
+
+    Each bet type is represented by its payout ratio
+
+    Attributes
+    ----------
+    Single : int
+    Color : int
+    Dozen : int
+    """
+
+    Single: int = 36
+    Color: int = 2
+    Dozen: int = 3
 
 
 @dataclass
@@ -17,14 +47,14 @@ class Bet:
         Color of pockets in bet
     amount : List[int]
         Amount of bet
-    bet_type : str
+    bet_type : BetTypes
         Type of bet
     """
 
     numbers: List[int] = field(default_factory=list)
     color: str = ""
     amount: List[int] = field(default_factory=list)
-    bet_type: str = ""
+    bet_type: BetTypes = BetTypes(2)  # some default value
 
 
 class Strategy(ABC):
@@ -102,7 +132,7 @@ class RandomStrategy(Strategy):
 
         bet_numbers = random.sample(range(pockets_num), chips_num)
         bet_amount = [min_bet for _ in range(chips_num)]
-        return Bet(numbers=bet_numbers, amount=bet_amount, bet_type="single")
+        return Bet(numbers=bet_numbers, amount=bet_amount, bet_type=BetTypes.Single)
 
 
 class MartingaleStrategy(Strategy):
@@ -119,7 +149,7 @@ class MartingaleStrategy(Strategy):
         pockets_num: int,
         last: bool = False,
     ) -> Bet:
-        """Make bet on random color according to Martingale startegy
+        """Make bet on random color according to Martingale strategy
 
         If last bet lost then bet on same color with doubled amount
 
@@ -145,12 +175,16 @@ class MartingaleStrategy(Strategy):
         if balance < min_bet:
             return Bet()
 
-        bet_color = random.choice(["red", "black"])
+        bet_color = random.choice(list(ColorTypes))
         if self._is_first or last:
             self._is_first = False
-            self._last_color = bet_color
+            self._last_color = bet_color.value
             self._last_bet_amount = [min_bet]
-            return Bet(color=bet_color, amount=self._last_bet_amount, bet_type="color")
+            return Bet(
+                color=bet_color.value,
+                amount=self._last_bet_amount,
+                bet_type=BetTypes.Color,
+            )
 
         if (
             balance >= self._last_bet_amount[0] * 2
@@ -161,7 +195,9 @@ class MartingaleStrategy(Strategy):
             self._last_bet_amount = [min_bet]
 
         return Bet(
-            color=self._last_color, amount=self._last_bet_amount, bet_type="color"
+            color=self._last_color,
+            amount=self._last_bet_amount,
+            bet_type=BetTypes.Color,
         )
 
 
@@ -210,4 +246,4 @@ class DozenStrategy(Strategy):
         bet_amount = [
             min_bet * min(balance // min_bet, numbers_bet, max_bet // min_bet)
         ]
-        return Bet(numbers=bet_numbers, amount=bet_amount, bet_type="dozen")
+        return Bet(numbers=bet_numbers, amount=bet_amount, bet_type=BetTypes.Dozen)

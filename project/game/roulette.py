@@ -1,6 +1,6 @@
 from project.game.bot import Bot
 from project.game.wheel import Wheel, Pocket
-from typing import List, Set, Tuple, Dict
+from typing import List, Set, Tuple
 
 
 class Roulette:
@@ -205,10 +205,9 @@ class Roulette:
         ------
         int
         """
-        payout_ratio: Dict[str, int] = {"color": 2, "single": 36, "dozen": 3}
 
         bet = bot.last_bet
-        won = bet.amount[0] * payout_ratio[bet.bet_type]
+        won = bet.amount[0] * bet.bet_type.value
 
         return won
 
@@ -268,7 +267,7 @@ class Roulette:
                 elif len(bet.numbers) != 0:
                     msg += (
                         "".join(map(lambda n: str(n) + " ", bet.numbers))
-                        + f"({bet.bet_type})"
+                        + f"({bet.bet_type.name.lower()})"
                     )
 
         return msg + "\n\n"
