@@ -16,16 +16,16 @@ The wheel is spinning
 
 Bets:
 ----
-    bot1 made a bet with 18 chips on 22 6 8 25 0 9 30 26 27 29 7 10 35 18 23 1 15 5 (single)
-    bot2 made a bet with 1 chips on red (color)
-    bot3 made a bet with 12 chips on 25 26 27 28 29 30 31 32 33 34 35 36 (dozen)
+    bot1 made a bet with 18 chips on 33 28 16 8 7 17 31 6 32 24 21 13 23 18 27 3 9 5 (single)
+    bot2 made a bet with 1 chips on black (color)
+    bot3 made a bet with 12 chips on 13 14 15 16 17 18 19 20 21 22 23 24 (dozen)
 
-The winning number and color: 18 red
+The winning number and color: 7 red
 
 Current game state:
 -------------------
-    Players: bot1(balance=118) bot2(balance=101) bot3(balance=88)
-    Winners of the round: bot1 bot2
+    Players: bot1(balance=118) bot2(balance=99) bot3(balance=88)
+    Winners of the round: bot1
     Bankrupts: no bankrupts
 
 === ROUND 2 ===
@@ -34,16 +34,16 @@ The wheel is spinning
 
 Bets:
 ----
-    bot1 made a bet with 18 chips on 32 13 19 11 2 10 12 35 14 0 21 33 4 5 29 6 3 27 (single)
-    bot2 made a bet with 1 chips on red (color)
+    bot1 made a bet with 18 chips on 31 10 0 7 35 23 27 24 14 11 25 4 6 12 5 22 26 33 (single)
+    bot2 made a bet with 2 chips on black (color)
     bot3 made a bet with 12 chips on 25 26 27 28 29 30 31 32 33 34 35 36 (dozen)
 
-The winning number and color: 26 black
+The winning number and color: 19 red
 
 Current game state:
 -------------------
-    Players: bot1(balance=100) bot2(balance=100) bot3(balance=112)
-    Winners of the round: bot3
+    Players: bot1(balance=100) bot2(balance=97) bot3(balance=76)
+    Winners of the round: no winners
     Bankrupts: no bankrupts
 
 === ROUND 3 ===
@@ -52,16 +52,16 @@ The wheel is spinning
 
 Bets:
 ----
-    bot1 made a bet with 18 chips on 2 15 6 11 35 20 0 17 7 24 31 4 12 9 36 13 25 27 (single)
-    bot2 made a bet with 2 chips on red (color)
-    bot3 made a bet with 12 chips on 25 26 27 28 29 30 31 32 33 34 35 36 (dozen)
+    bot1 made a bet with 18 chips on 32 15 9 20 10 27 17 8 7 22 16 31 14 19 13 3 33 2 (single)
+    bot2 made a bet with 4 chips on black (color)
+    bot3 made a bet with 12 chips on 13 14 15 16 17 18 19 20 21 22 23 24 (dozen)
 
-The winning number and color: 22 black
+The winning number and color: 0 green
 
 Current game state:
 -------------------
-    Players: bot1(balance=82) bot2(balance=98) bot3(balance=100)
-    Winners of the round: no winners
+    Players: bot1(balance=118) bot2(balance=93) bot3(balance=100)
+    Winners of the round: bot1 bot3
     Bankrupts: no bankrupts
 
 === ROUND 4 ===
@@ -70,16 +70,16 @@ The wheel is spinning
 
 Bets:
 ----
-    bot1 made a bet with 18 chips on 15 28 25 7 26 24 4 17 34 11 0 36 22 14 27 19 6 9 (single)
-    bot2 made a bet with 4 chips on red (color)
-    bot3 made a bet with 12 chips on 25 26 27 28 29 30 31 32 33 34 35 36 (dozen)
+    bot1 made a bet with 18 chips on 13 29 6 28 8 1 10 15 7 16 30 36 31 5 20 17 22 0 (single)
+    bot2 made a bet with 8 chips on black (color)
+    bot3 made a bet with 12 chips on 1 2 3 4 5 6 7 8 9 10 11 12 (dozen)
 
-The winning number and color: 18 red
+The winning number and color: 27 red
 
 Current game state:
 -------------------
-    Players: bot1(balance=64) bot2(balance=102) bot3(balance=88)
-    Winners of the round: bot2
+    Players: bot1(balance=100) bot2(balance=85) bot3(balance=88)
+    Winners of the round: no winners
     Bankrupts: no bankrupts
 
 === ROUND 5 ===
@@ -88,16 +88,16 @@ The wheel is spinning
 
 Bets:
 ----
-    bot1 made a bet with 18 chips on 6 34 17 30 33 10 36 31 21 3 2 8 13 22 15 32 4 16 (single)
-    bot2 made a bet with 1 chips on red (color)
+    bot1 made a bet with 18 chips on 29 10 12 2 7 24 1 14 6 31 19 27 33 28 5 20 0 9 (single)
+    bot2 made a bet with 16 chips on black (color)
     bot3 made a bet with 12 chips on 1 2 3 4 5 6 7 8 9 10 11 12 (dozen)
 
-The winning number and color: 19 red
+The winning number and color: 1 red
 
 Current game state:
 -------------------
-    Players: bot1(balance=46) bot2(balance=103) bot3(balance=76)
-    Winners of the round: bot2
+    Players: bot1(balance=118) bot2(balance=69) bot3(balance=112)
+    Winners of the round: bot1 bot3
     Bankrupts: no bankrupts
 
 === ROUND 6 ===
@@ -106,16 +106,16 @@ The wheel is spinning
 
 Bets:
 ----
-    bot1 made a bet with 18 chips on 5 31 4 25 26 33 21 17 18 23 29 11 2 30 22 15 16 27 (single)
-    bot2 made a bet with 1 chips on red (color)
+    bot1 made a bet with 18 chips on 33 15 13 26 19 28 11 6 32 10 30 36 29 14 8 9 3 31 (single)
+    bot2 made a bet with 32 chips on black (color)
     bot3 made a bet with 12 chips on 1 2 3 4 5 6 7 8 9 10 11 12 (dozen)
 
-The winning number and color: 35 black
+The winning number and color: 29 black
 
 Current game state:
 -------------------
-    Players: bot1(balance=28) bot2(balance=102) bot3(balance=64)
-    Winners of the round: no winners
+    Players: bot1(balance=136) bot2(balance=101) bot3(balance=100)
+    Winners of the round: bot1 bot2
     Bankrupts: no bankrupts
 
 === ROUND 7 ===
@@ -124,16 +124,16 @@ The wheel is spinning
 
 Bets:
 ----
-    bot1 made a bet with 18 chips on 1 36 5 35 21 9 16 22 15 30 27 11 29 4 0 3 8 25 (single)
-    bot2 made a bet with 2 chips on red (color)
-    bot3 made a bet with 12 chips on 13 14 15 16 17 18 19 20 21 22 23 24 (dozen)
+    bot1 made a bet with 18 chips on 10 8 24 32 9 17 14 29 26 15 6 19 2 34 28 33 4 1 (single)
+    bot2 made a bet with 1 chips on red (color)
+    bot3 made a bet with 12 chips on 25 26 27 28 29 30 31 32 33 34 35 36 (dozen)
 
-The winning number and color: 22 black
+The winning number and color: 1 red
 
 Current game state:
 -------------------
-    Players: bot1(balance=46) bot2(balance=100) bot3(balance=88)
-    Winners of the round: bot1 bot3
+    Players: bot1(balance=154) bot2(balance=102) bot3(balance=88)
+    Winners of the round: bot1 bot2
     Bankrupts: no bankrupts
 
 === ROUND 8 ===
@@ -142,16 +142,16 @@ The wheel is spinning
 
 Bets:
 ----
-    bot1 made a bet with 18 chips on 28 6 22 27 21 15 1 35 20 24 26 16 18 9 23 34 7 0 (single)
-    bot2 made a bet with 4 chips on red (color)
-    bot3 made a bet with 12 chips on 13 14 15 16 17 18 19 20 21 22 23 24 (dozen)
+    bot1 made a bet with 18 chips on 34 6 27 25 10 18 14 5 9 33 22 7 31 2 16 13 35 17 (single)
+    bot2 made a bet with 1 chips on
+    bot3 made a bet with 12 chips on 25 26 27 28 29 30 31 32 33 34 35 36 (dozen)
 
-The winning number and color: 30 red
+The winning number and color: 9 red
 
 Current game state:
 -------------------
-    Players: bot1(balance=28) bot2(balance=104) bot3(balance=76)
-    Winners of the round: bot2
+    Players: bot1(balance=172) bot2(balance=101) bot3(balance=76)
+    Winners of the round: bot1
     Bankrupts: no bankrupts
 
 === ROUND 9 ===
@@ -160,16 +160,16 @@ The wheel is spinning
 
 Bets:
 ----
-    bot1 made a bet with 18 chips on 26 23 8 33 31 14 20 11 30 21 10 15 9 13 27 19 2 12 (single)
-    bot2 made a bet with 1 chips on red (color)
-    bot3 made a bet with 12 chips on 13 14 15 16 17 18 19 20 21 22 23 24 (dozen)
+    bot1 made a bet with 18 chips on 27 10 4 28 8 2 34 1 11 9 24 18 33 19 16 14 15 5 (single)
+    bot2 made a bet with 2 chips on
+    bot3 made a bet with 12 chips on 25 26 27 28 29 30 31 32 33 34 35 36 (dozen)
 
-The winning number and color: 17 black
+The winning number and color: 0 green
 
 Current game state:
 -------------------
-    Players: bot1(balance=10) bot2(balance=103) bot3(balance=100)
-    Winners of the round: bot3
+    Players: bot1(balance=190) bot2(balance=103) bot3(balance=100)
+    Winners of the round: bot1 bot2 bot3
     Bankrupts: no bankrupts
 
 === ROUND 10 ===
@@ -178,21 +178,21 @@ The wheel is spinning
 
 Bets:
 ----
-    bot1 made a bet with 10 chips on 1 2 28 10 14 18 34 29 17 3 (single)
-    bot2 made a bet with 2 chips on red (color)
-    bot3 made a bet with 12 chips on 1 2 3 4 5 6 7 8 9 10 11 12 (dozen)
+    bot1 made a bet with 18 chips on 22 35 28 13 12 30 27 23 19 26 18 16 20 25 1 29 3 33 (single)
+    bot2 made a bet with 1 chips on
+    bot3 made a bet with 12 chips on 13 14 15 16 17 18 19 20 21 22 23 24 (dozen)
 
-The winning number and color: 25 red
+The winning number and color: 33 black
 
 Current game state:
 -------------------
-    Players: bot1(balance=0) bot2(balance=105) bot3(balance=88)
-    Winners of the round: bot2
-    Bankrupts: bot1
+    Players: bot1(balance=208) bot2(balance=102) bot3(balance=88)
+    Winners of the round: bot1
+    Bankrupts: no bankrupts
 
 
 Game is over
 
-bot1 lost
+bot1 won
 bot2 won
 bot3 lost
