@@ -1,3 +1,4 @@
+from project.game.strategy import ColorTypes
 from project.game.bot import Bot
 from project.game.wheel import Wheel, Pocket
 from typing import List, Set, Tuple
@@ -148,7 +149,7 @@ class Roulette:
 
         self._write(self._get_bets(min_bet))
         self._write(
-            f"The winning number and color: {str(pocket.num)} {str(pocket.color)}\n\n"
+            f"The winning number and color: {str(pocket.num)} {str(pocket.color.value)}\n\n"
         )
 
         winners = self._determine_round_winners(min_bet, pocket)
@@ -262,8 +263,8 @@ class Roulette:
                     + f" made a bet with {sum(bot.last_bet.amount)} chips on "
                 )
                 bet = bot.last_bet
-                if len(bet.color) != 0:
-                    msg += bet.color + " (color)"
+                if bet.color != ColorTypes.Green:
+                    msg += bet.color.value + " (color)"
                 elif len(bet.numbers) != 0:
                     msg += (
                         "".join(map(lambda n: str(n) + " ", bet.numbers))

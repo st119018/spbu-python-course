@@ -12,10 +12,12 @@ class ColorTypes(Enum):
     ---------
     Black : str
     Red : str
+    Green: str
     """
 
     Black: str = "black"
     Red: str = "red"
+    Green: str = "green"
 
 
 class BetTypes(Enum):
@@ -43,7 +45,7 @@ class Bet:
     ----------
     numbers : List[int]
         Pocket numbers in bet
-    color : str
+    color : ColorTypes
         Color of pockets in bet
     amount : List[int]
         Amount of bet
@@ -52,9 +54,9 @@ class Bet:
     """
 
     numbers: List[int] = field(default_factory=list)
-    color: str = ""
+    color: ColorTypes = ColorTypes.Green  # some default value
     amount: List[int] = field(default_factory=list)
-    bet_type: BetTypes = BetTypes(2)  # some default value
+    bet_type: BetTypes = BetTypes.Color  # some default value
 
 
 class Strategy(ABC):
@@ -138,7 +140,7 @@ class RandomStrategy(Strategy):
 class MartingaleStrategy(Strategy):
     def __init__(self):
         self._last_bet_amount: List[int] = []
-        self._last_color: str
+        self._last_color: ColorTypes
         self._is_first = True
 
     def make_bet(
@@ -178,10 +180,10 @@ class MartingaleStrategy(Strategy):
         bet_color = random.choice(list(ColorTypes))
         if self._is_first or last:
             self._is_first = False
-            self._last_color = bet_color.value
+            self._last_color = bet_color
             self._last_bet_amount = [min_bet]
             return Bet(
-                color=bet_color.value,
+                color=bet_color,
                 amount=self._last_bet_amount,
                 bet_type=BetTypes.Color,
             )

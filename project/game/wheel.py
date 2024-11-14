@@ -11,12 +11,12 @@ class Pocket:
     ----------
     num : int
         Number in the pocket
-    color : str
+    color : ColorTypes
         Color of pocket
     """
 
     num: int = 0
-    color: str = "green"
+    color: ColorTypes = ColorTypes.Green
 
 
 class Wheel:
@@ -39,9 +39,9 @@ class Wheel:
         flag = True
         for i in range(1, self._pockets_num):
             if flag:
-                self._pockets.append(Pocket(i, ColorTypes.Red.value))
+                self._pockets.append(Pocket(i, ColorTypes.Red))
             else:
-                self._pockets.append(Pocket(i, ColorTypes.Black.value))
+                self._pockets.append(Pocket(i, ColorTypes.Black))
 
             # color of all pockets alternates
             # except for pairs (10, 11), (18, 19), (28, 29)
