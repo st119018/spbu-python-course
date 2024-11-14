@@ -43,11 +43,11 @@ def test_game_bot():
 
 @pytest.fixture
 def roulette():
-    bot1 = Bot(RandomStrategy(), 100, "bot1")
-    bot2 = Bot(MartingaleStrategy(), 100, "bot2")
-    bot3 = Bot(DozenStrategy(), 100, "bot3")
+    bot1 = Bot(RandomStrategy(), 100)
+    bot2 = Bot(MartingaleStrategy(), 100)
+    bot3 = Bot(DozenStrategy(), 100)
     bots = [bot1, bot2, bot3]
-    return Roulette(bots, verbose_file=True)
+    return Roulette(bots)
 
 
 def test_game_roulette(roulette):
